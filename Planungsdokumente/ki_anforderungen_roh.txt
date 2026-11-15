@@ -1,0 +1,69 @@
+# Aufgabe 2 – KI-generierte funktionale Anforderungen
+
+## Verwendeter Prompt
+
+Erstelle eine Liste mit mindestens 10 möglichen funktionalen Anforderungen für ein Softwareprojekt mit dem Thema „Schwimmbad – Kursplanung“.
+
+Das Programm soll später eine grafische Anwendung mit einer Datenbankverbindung werden. Es soll die Verwaltung und Planung von Schwimmkursen ermöglichen.
+
+Berücksichtige dabei folgende Bereiche:
+- Verwaltung von Schwimmkursen
+- Verwaltung von Teilnehmern
+- Verwaltung von Kursleitern
+- Anmeldung von Teilnehmern zu Kursen
+- Planung von Kurszeiten
+- Verwaltung der verfügbaren Kursplätze
+
+Formuliere jede Anforderung verständlich und konkret. Beschreibe jeweils, was ein Benutzer mit dem Programm machen können soll. Nummeriere die Anforderungen.
+
+## Ungefilterte KI-Antwort
+
+Hier sind 12 mögliche funktionale Anforderungen für das Projekt „Schwimmbad – Kursplanung“:
+
+**1. Schwimmkurse erstellen**
+
+Das Programm soll es ermöglichen, neue Schwimmkurse mit einem Namen, einer Beschreibung, einem Startdatum und einem Enddatum anzulegen.
+
+**2. Schwimmkurse bearbeiten**
+
+Der Benutzer soll die Daten eines bereits vorhandenen Schwimmkurses ändern können.
+
+**3. Schwimmkurse löschen**
+
+Der Benutzer soll nicht mehr benötigte Schwimmkurse aus dem System löschen können.
+
+**4. Teilnehmer verwalten**
+
+Das Programm soll ermöglichen, neue Teilnehmer mit Vorname, Nachname, Geburtsdatum und Kontaktdaten anzulegen, zu bearbeiten und zu löschen.
+
+**5. Kursleiter verwalten**
+
+Der Benutzer soll Kursleiter mit ihren persönlichen Daten und Qualifikationen erfassen und verwalten können.
+
+**6. Teilnehmer zu Kursen anmelden**
+
+Das Programm soll ermöglichen, einen Teilnehmer für einen bestimmten Schwimmkurs anzumelden.
+
+**7. Teilnehmer von Kursen abmelden**
+
+Der Benutzer soll eine bestehende Anmeldung eines Teilnehmers zu einem Schwimmkurs entfernen können.
+
+**8. Kurszeiten planen**
+
+Das Programm soll ermöglichen, für jeden Schwimmkurs einen Wochentag sowie eine Anfangs- und Endzeit festzulegen.
+
+**9. Kursleiter zuweisen**
+
+Der Benutzer soll einem Schwimmkurs einen verfügbaren Kursleiter zuweisen können.
+
+**10. Kurskapazität festlegen**
+
+Das Programm soll ermöglichen, eine maximale Teilnehmerzahl für jeden Schwimmkurs festzulegen.
+
+**11. Freie Kursplätze anzeigen**
+
+Das Programm soll anzeigen, wie viele Plätze in einem Schwimmkurs noch verfügbar sind.
+
+**12. Schwimmkurse suchen und anzeigen**
+
+Der Benutzer soll Schwimmkurse anhand ihres Namens oder ihrer Kurszeiten suchen und sich die passenden Ergebnisse anzeigen lassen können.

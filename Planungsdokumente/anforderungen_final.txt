@@ -1,0 +1,69 @@
+# Aufgabe 2 – Finale funktionale Anforderungen
+
+## 1. Schwimmkurse erstellen und verwalten
+
+**Anforderung:**
+
+Das Programm soll dem Benutzer ermöglichen, Schwimmkurse anzulegen, zu bearbeiten und zu löschen. Zu einem Kurs sollen der Kursname, die Beschreibung, das Startdatum, das Enddatum und die maximale Teilnehmerzahl gespeichert werden.
+
+**Begründung:**
+
+Die Verwaltung von Schwimmkursen ist die wichtigste Grundlage des gesamten Projekts. Ohne Kurse können keine Teilnehmer angemeldet werden.
+
+**Geschätzter Aufwand:** 8 Stunden
+
+## 2. Teilnehmer verwalten
+
+**Anforderung:**
+
+Das Programm soll ermöglichen, Teilnehmer mit Vorname, Nachname, Geburtsdatum und Kontaktdaten anzulegen, zu bearbeiten und zu löschen.
+
+**Begründung:**
+
+Die Teilnehmerverwaltung ist notwendig, damit Personen im System gespeichert und später zu Schwimmkursen angemeldet werden können.
+
+**Geschätzter Aufwand:** 7 Stunden
+
+## 3. Teilnehmer zu Schwimmkursen anmelden
+
+**Anforderung:**
+
+Der Benutzer soll Teilnehmer einem Schwimmkurs zuweisen und bestehende Anmeldungen wieder entfernen können. Vor einer Anmeldung soll das Programm prüfen, ob im Kurs noch ein freier Platz vorhanden ist.
+
+**Begründung:**
+
+Die Anmeldung ist eine der zentralen Funktionen des Projekts. Außerdem verhindert die Prüfung der freien Plätze, dass ein Kurs über seine maximale Teilnehmerzahl hinaus belegt wird.
+
+**Geschätzter Aufwand:** 5 Stunden
+
+## 4. Kursleitern Schwimmkurse zuweisen
+
+**Anforderung:**
+
+Das Programm soll ermöglichen, einem Schwimmkurs einen Kursleiter zuzuweisen und diese Zuweisung bei Bedarf zu ändern.
+
+**Begründung:**
+
+Jeder Schwimmkurs benötigt eine verantwortliche Person. Durch diese Funktion kann die Organisation der Kurse besser verwaltet werden.
+
+**Geschätzter Aufwand:** 4 Stunden
+
+## 5. Schwimmkurse mit Zeiten und freien Plätzen anzeigen
+
+**Anforderung:**
+
+Das Programm soll alle vorhandenen Schwimmkurse mit ihrem Namen, ihren Kurszeiten, dem zugewiesenen Kursleiter und der Anzahl der freien Plätze anzeigen können. Außerdem soll der Benutzer nach Kursen suchen können.
+
+**Begründung:**
+
+Diese Funktion gibt dem Benutzer einen schnellen Überblick über das Kursangebot und hilft dabei, passende Kurse zu finden.
+
+**Geschätzter Aufwand:** 6 Stunden
+
+---
+
+## Gesamtaufwand
+
+Der geschätzte Gesamtaufwand für die Umsetzung dieser fünf Anforderungen beträgt **30 Stunden**.
+
+Die Zeitangaben sind Schätzungen für die Planung. Der tatsächliche Aufwand kann während der Entwicklung abweichen.
