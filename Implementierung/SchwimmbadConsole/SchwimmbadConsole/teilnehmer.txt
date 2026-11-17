@@ -1,0 +1,2 @@
+﻿1;Max;Mueller;17.08.2000;0176549871;max@beispiel.de;2
+2;jo;Bozess;07.08.2015;0175498321;jo@beispiel.de;2

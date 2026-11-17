@@ -8,6 +8,7 @@ namespace SchwimmbadConsole
         static void Main(string[] args)
         {
             KursVerwaltung kursVerwaltung = new KursVerwaltung();
+            TeilnehmerVerwaltung teilnehmerVerwaltung = new TeilnehmerVerwaltung();
 
             bool programmLaeuft = true;
 
@@ -20,8 +21,8 @@ namespace SchwimmbadConsole
                 Console.WriteLine("==================================");
                 Console.WriteLine();
                 Console.WriteLine("1. Kursverwaltung");
-                Console.WriteLine("2. Teilnehmer anmelden");
-                Console.WriteLine("3. Teilnehmer anzeigen");
+                Console.WriteLine("2. Teilnehmerverwaltung");
+                
                 Console.WriteLine("0. Programm beenden");
                 Console.WriteLine();
                 Console.Write("Bitte wählen Sie eine Option: ");
@@ -35,13 +36,11 @@ namespace SchwimmbadConsole
                         break;
 
                     case "2":
-                        Console.WriteLine("Teilnehmeranmeldung kommt als Nächstes.");
-                   
+                        teilnehmerVerwaltung.Teilnehmermenue();
                         break;
 
                     case "3":
-                        Console.WriteLine("Teilnehmeranzeige kommt als Nächstes.");
-                   
+                        teilnehmerVerwaltung.AlleTeilnehmerAnzeigen();
                         break;
 
                     case "0":
