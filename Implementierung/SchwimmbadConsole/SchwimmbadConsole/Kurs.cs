@@ -25,6 +25,9 @@ namespace SchwimmbadConsole
                 Beginn = beginn;
                 Ende = ende;
                 MaxTeilnehmer = maxTeilnehmer;
+
+
+
             }
 
 

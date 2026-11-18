@@ -77,7 +77,7 @@ namespace SchwimmbadConsole
 
 
 
-            Kurs ausgewaehlterKurs = null;
+            Kurs? ausgewaehlterKurs = null;
 
             foreach (Kurs kurs in kurse)
             {

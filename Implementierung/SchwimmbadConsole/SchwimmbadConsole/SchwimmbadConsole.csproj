@@ -11,6 +11,12 @@
     <None Update="Kurse.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="kurskursleiter.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="kursleiter.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="teilnehmer.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
