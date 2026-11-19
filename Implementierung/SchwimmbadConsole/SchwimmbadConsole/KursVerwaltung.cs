@@ -2,6 +2,7 @@
 using SchwimmbadConsole.SchwimmbadConsole;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SchwimmbadConsole
 {
@@ -13,6 +14,80 @@ namespace SchwimmbadConsole
         {
             datenZugriff = new KursDatenzugriff();
         }
+
+
+
+
+        public void KursAnlegen()
+        {
+            Console.Clear();
+
+            Console.WriteLine("==================================");
+            Console.WriteLine("          KURS ANLEGEN");
+            Console.WriteLine("==================================");
+
+            Console.Write("Kursname: ");
+            string kursname = Console.ReadLine() ?? "";
+
+            Console.Write("Wochentag: ");
+            string wochentag = Console.ReadLine() ?? "";
+
+            Console.Write("Beginn (z.B. 14:00): ");
+            string beginn = Console.ReadLine() ?? "";
+
+            Console.Write("Ende (z.B. 15:00): ");
+            string ende = Console.ReadLine() ?? "";
+
+            Console.Write("Maximale Teilnehmerzahl: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int maxTeilnehmer) ||
+                maxTeilnehmer <= 0)
+            {
+                Console.WriteLine("Ungültige Teilnehmerzahl!");
+                Console.ReadKey();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(kursname) ||
+                string.IsNullOrWhiteSpace(wochentag) ||
+                string.IsNullOrWhiteSpace(beginn) ||
+                string.IsNullOrWhiteSpace(ende))
+            {
+                Console.WriteLine("Bitte alle Felder ausfüllen!");
+                Console.ReadKey();
+                return;
+            }
+
+            List<Kurs> kurse = datenZugriff.KurseLaden();
+
+            int neueID = 1;
+
+            if (kurse.Count > 0)
+            {
+                neueID = kurse.Max(k => k.KursID) + 1;
+            }
+
+            Kurs neuerKurs = new Kurs(
+                neueID,
+                kursname,
+                wochentag,
+                beginn,
+                ende,
+                maxTeilnehmer);
+
+            datenZugriff.KursSpeichern(neuerKurs);
+
+            Console.WriteLine();
+            Console.WriteLine("Kurs wurde erfolgreich angelegt!");
+            Console.WriteLine("Neue Kurs-ID: " + neueID);
+
+            Console.WriteLine();
+            Console.WriteLine("Drücke eine Taste zum Zurückkehren.");
+            Console.ReadKey();
+        }
+
+
+
 
 
         public void Kursmenue()
@@ -30,6 +105,7 @@ namespace SchwimmbadConsole
                 Console.WriteLine("==================================");
                 Console.WriteLine();
                 Console.WriteLine("1. Alle Schwimmkurse anzeigen");
+                Console.WriteLine("2. Neuen Schwimmkurs anlegen");
                 Console.WriteLine("0. Zurück zum Hauptmenü");
                 Console.WriteLine();
                 Console.Write("Bitte wählen Sie eine Option: ");
@@ -39,11 +115,17 @@ namespace SchwimmbadConsole
                 switch (auswahl)
                 {
                     case "1":
+                        kurse = datenZugriff.KurseLaden();
+
                         AlleKurseAnzeigen(kurse);
 
                         Console.WriteLine();
                         Console.WriteLine("Drücke eine Taste zum Zurückkehren.");
                         Console.ReadKey();
+                        break;
+
+                    case "2":
+                        KursAnlegen();
                         break;
 
                     case "0":

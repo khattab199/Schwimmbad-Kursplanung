@@ -51,7 +51,6 @@ namespace SchwimmbadConsole
 
                     default:
                         Console.WriteLine("Ungültige Auswahl!");
-                   
                         break;
                 }
             }

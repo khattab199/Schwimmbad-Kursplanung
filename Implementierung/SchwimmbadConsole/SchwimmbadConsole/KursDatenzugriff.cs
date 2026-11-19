@@ -8,11 +8,14 @@ namespace SchwimmbadConsole
 {
     public class KursDatenzugriff
     {
+        private string dateiPfad =
+            Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "kurse.txt");
+
         public List<Kurs> KurseLaden()
         {
             List<Kurs> kurse = new List<Kurs>();
-
-            string dateiPfad = "kurse.txt";
 
             if (!File.Exists(dateiPfad))
             {
@@ -25,10 +28,7 @@ namespace SchwimmbadConsole
             foreach (string zeile in zeilen)
             {
                 if (string.IsNullOrWhiteSpace(zeile))
-                {
                     continue;
-                }
-
 
                 string[] daten = zeile.Split(';');
 
@@ -42,8 +42,7 @@ namespace SchwimmbadConsole
                         daten[2],
                         daten[3],
                         daten[4],
-                        maxTeilnehmer
-                    );
+                        maxTeilnehmer);
 
                     kurse.Add(kurs);
                 }
@@ -56,10 +55,19 @@ namespace SchwimmbadConsole
             return kurse;
         }
 
+        public void KursSpeichern(Kurs kurs)
+        {
+            string zeile =
+                kurs.KursID + ";" +
+                kurs.Kursname + ";" +
+                kurs.Wochentag + ";" +
+                kurs.Beginn + ";" +
+                kurs.Ende + ";" +
+                kurs.MaxTeilnehmer;
 
-
-
-
-
+            File.AppendAllText(
+                dateiPfad,
+                zeile + Environment.NewLine);
+        }
     }
 }

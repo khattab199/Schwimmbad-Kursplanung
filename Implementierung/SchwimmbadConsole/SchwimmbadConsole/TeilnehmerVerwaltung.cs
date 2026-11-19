@@ -148,12 +148,14 @@ namespace SchwimmbadConsole
 
 
 
+
+
         public void AlleTeilnehmerAnzeigen()
         {
             Console.Clear();
 
-            // Teilnehmer erneut aus der Datei laden
             teilnehmerListe = datenZugriff.TeilnehmerLaden();
+            kurse = kursDatenzugriff.KurseLaden();
 
             Console.WriteLine("==============================================");
             Console.WriteLine("             ALLE TEILNEHMER");
@@ -166,24 +168,35 @@ namespace SchwimmbadConsole
             else
             {
                 Console.WriteLine(
-                    "{0,-5} {1,-15} {2,-15} {3,-15} {4,-25} {5,-8}",
-                    "ID", "Vorname", "Nachname",
-                    "Geburtsdatum", "E-Mail", "Kurs-ID"
-                );
+                    "{0,-5} {1,-12} {2,-15} {3,-13} {4,-16} {5,-25} {6,-8} {7,-22}",
+                    "ID", "Vorname", "Nachname", "Geburtsdatum",
+                    "Telefon", "E-Mail", "Kurs-ID", "Kursname");
 
-                Console.WriteLine(new string('-', 90));
+                Console.WriteLine(new string('-', 125));
 
                 foreach (Teilnehmer teilnehmer in teilnehmerListe)
                 {
+                    string kursname = "Unbekannt";
+
+                    foreach (Kurs kurs in kurse)
+                    {
+                        if (kurs.KursID == teilnehmer.KursID)
+                        {
+                            kursname = kurs.Kursname;
+                            break;
+                        }
+                    }
+
                     Console.WriteLine(
-                        "{0,-5} {1,-15} {2,-15} {3,-15} {4,-25} {5,-8}",
+                        "{0,-5} {1,-12} {2,-15} {3,-13} {4,-16} {5,-25} {6,-8} {7,-22}",
                         teilnehmer.TeilnehmerID,
                         teilnehmer.Vorname,
                         teilnehmer.Nachname,
                         teilnehmer.Geburtsdatum,
+                        teilnehmer.Telefon,
                         teilnehmer.Email,
-                        teilnehmer.KursID
-                    );
+                        teilnehmer.KursID,
+                        kursname);
                 }
             }
 

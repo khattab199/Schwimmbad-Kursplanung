@@ -157,6 +157,72 @@ namespace SchwimmbadConsole
 
 
 
+        public void AlleZuordnungenAnzeigen()
+        {
+            Console.Clear();
+
+            Console.WriteLine("======================================");
+            Console.WriteLine("       KURSLEITER-ZUORDNUNGEN");
+            Console.WriteLine("======================================");
+
+            // Kurse laden
+            List<Kurs> kurse = kursDatenzugriff.KurseLaden();
+
+            // Kursleiter laden
+            kursleiterListe = datenZugriff.KursleiterLaden();
+
+            // Zuordnungen laden
+            List<KursKursleiter> zuordnungen =
+                zuordnungsDatenzugriff.ZuordnungenLaden();
+
+            if (zuordnungen.Count == 0)
+            {
+                Console.WriteLine("Es sind noch keine Zuordnungen vorhanden.");
+            }
+            else
+            {
+                foreach (Kurs kurs in kurse)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Kurs: " + kurs.Kursname);
+
+                    bool kursHatKursleiter = false;
+
+                    foreach (KursKursleiter zuordnung in zuordnungen)
+                    {
+                        if (zuordnung.KursID == kurs.KursID)
+                        {
+                            foreach (Kursleiter kursleiter in kursleiterListe)
+                            {
+                                if (kursleiter.KursleiterID ==
+                                    zuordnung.KursleiterID)
+                                {
+                                    Console.WriteLine(
+                                        "Kursleiter: " +
+                                        kursleiter.Vorname + " " +
+                                        kursleiter.Nachname);
+
+                                    kursHatKursleiter = true;
+                                }
+                            }
+                        }
+                    }
+
+                    if (!kursHatKursleiter)
+                    {
+                        Console.WriteLine("Noch kein Kursleiter zugeordnet.");
+                    }
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Drücke eine Taste zum Zurückkehren.");
+            Console.ReadKey();
+        }
+
+
+
+
         public void KursleiterAnlegen()
         {
             Console.Clear();
@@ -261,6 +327,7 @@ namespace SchwimmbadConsole
                 Console.WriteLine("1. Kursleiter anlegen");
                 Console.WriteLine("2. Alle Kursleiter anzeigen");
                 Console.WriteLine("3. Kursleiter einem Kurs zuordnen");
+                Console.WriteLine("4. Alle Kursleiter-Zuordnungen anzeigen");
                 Console.WriteLine("0. Zurück zum Hauptmenü");
                 Console.WriteLine();
 
@@ -280,6 +347,10 @@ namespace SchwimmbadConsole
 
                     case "3":
                         KursleiterZuordnen();
+                        break;
+
+                    case "4":
+                        AlleZuordnungenAnzeigen();
                         break;
 
                     case "0":
