@@ -102,6 +102,45 @@ namespace SchwimmbadConsole
             Console.WriteLine("Projektdatei: " + projektDateiPfad);
         }
 
+
+        public void KursleiterLoeschen(int kursleiterID)
+        {
+            // Alle Kursleiter laden
+            List<Kursleiter> kursleiterListe = KursleiterLaden();
+
+            // Kursleiter anhand der ID suchen
+            Kursleiter? kursleiter = kursleiterListe.FirstOrDefault(k => k.KursleiterID == kursleiterID);
+
+            // Prüfen, ob Kursleiter existiert
+            if (kursleiter == null)
+            {
+                Console.WriteLine("Kursleiter wurde nicht gefunden!");
+                return;
+            }
+
+            // Kursleiter aus der Liste entfernen
+            kursleiterListe.Remove(kursleiter);
+
+            // Verbleibende Kursleiter als Textzeilen speichern
+            List<string> zeilen = new List<string>();
+
+            foreach (Kursleiter vorhandenerKursleiter in kursleiterListe)
+            {
+                string zeile =
+                    vorhandenerKursleiter.KursleiterID + ";" +
+                    vorhandenerKursleiter.Vorname + ";" +
+                    vorhandenerKursleiter.Nachname + ";" +
+                    vorhandenerKursleiter.Telefon + ";" +
+                    vorhandenerKursleiter.Email;
+
+                zeilen.Add(zeile);
+            }
+
+            // Datei aktualisieren
+            File.WriteAllLines(dateiPfad, zeilen);
+        }
+
+
     }
 
 }

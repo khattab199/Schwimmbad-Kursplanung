@@ -45,6 +45,7 @@ namespace SchwimmbadConsole
                         break;
 
                     case "0":
+                        //hier würde das programm beendet
                         programmLaeuft = false;
                         Console.WriteLine("Programm wird beendet.");
                         break;

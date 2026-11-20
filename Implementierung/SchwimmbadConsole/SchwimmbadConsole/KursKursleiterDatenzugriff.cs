@@ -77,5 +77,60 @@ namespace SchwimmbadConsole
         }
 
 
+
+        public void KursZuordnungenLoeschen(int kursID)
+        {
+            // Alle Zuordnungen laden
+            List<KursKursleiter> zuordnungen = ZuordnungenLaden();
+
+            // Zuordnungen des ausgewählten Kurses entfernen
+            zuordnungen.RemoveAll(z => z.KursID == kursID);
+
+            // Verbleibende Zuordnungen als Text speichern
+            List<string> zeilen = new List<string>();
+
+            foreach (KursKursleiter zuordnung in zuordnungen)
+            {
+                string zeile =
+                    zuordnung.KursID + ";" +
+                    zuordnung.KursleiterID;
+
+                zeilen.Add(zeile);
+            }
+
+            File.WriteAllLines(dateiPfad, zeilen);
+        }
+
+
+
+        
+
+        public void KursleiterZuordnungenLoeschen(int kursleiterID)
+        {
+            // Alle Zuordnungen laden
+            List<KursKursleiter> zuordnungen = ZuordnungenLaden();
+
+            // Alle Zuordnungen dieses Kursleiters entfernen
+            zuordnungen.RemoveAll(
+                z => z.KursleiterID == kursleiterID);
+
+            // Verbleibende Zuordnungen als Textzeilen speichern
+            List<string> zeilen = new List<string>();
+
+            foreach (KursKursleiter zuordnung in zuordnungen)
+            {
+                string zeile =
+                    zuordnung.KursID + ";" +
+                    zuordnung.KursleiterID;
+
+                zeilen.Add(zeile);
+            }
+
+            // Datei aktualisieren
+            File.WriteAllLines(dateiPfad, zeilen);
+        }
+
+
+
     }
 }

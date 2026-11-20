@@ -98,7 +98,7 @@ namespace SchwimmbadConsole
                 }
             }
 
-            if (anzahlTeilnehmer >= ausgewaehlterKurs.MaxTeilnehmer)
+            if (anzahlTeilnehmer >= ausgewaehlterKurs?.MaxTeilnehmer)
             {
                 Console.WriteLine("Dieser Schwimmkurs ist bereits voll!");
                 Console.ReadKey();
@@ -206,6 +206,79 @@ namespace SchwimmbadConsole
         }
 
 
+
+        public void TeilnehmerLoeschen()
+        {
+            Console.Clear();
+
+            Console.WriteLine("==================================");
+            Console.WriteLine("        TEILNEHMER LÖSCHEN");
+            Console.WriteLine("==================================");
+
+            // Alle Teilnehmer neu laden
+            teilnehmerListe = datenZugriff.TeilnehmerLaden();
+
+            // Prüfen, ob Teilnehmer vorhanden sind
+            if (teilnehmerListe.Count == 0)
+            {
+                Console.WriteLine("Es sind keine Teilnehmer vorhanden.");
+                Console.ReadKey();
+                return;
+            }
+
+            // Alle Teilnehmer anzeigen
+            AlleTeilnehmerAnzeigen();
+
+            Console.WriteLine();
+            Console.Write("Bitte geben Sie die Teilnehmer-ID ein: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int teilnehmerID))
+            {
+                Console.WriteLine("Ungültige Teilnehmer-ID!");
+                Console.ReadKey();
+                return;
+            }
+
+            // Teilnehmer suchen
+            Teilnehmer? teilnehmer = teilnehmerListe.FirstOrDefault(t => t.TeilnehmerID == teilnehmerID);
+
+            if (teilnehmer == null)
+            {
+                Console.WriteLine("Dieser Teilnehmer existiert nicht!");
+                Console.ReadKey();
+                return;
+            }
+
+            // Teilnehmer anzeigen
+            Console.WriteLine();
+            Console.WriteLine(
+                "Ausgewählter Teilnehmer: " +
+                teilnehmer.Vorname + " " + teilnehmer.Nachname);
+
+            Console.Write("Möchten Sie diesen Teilnehmer wirklich löschen? (j/n): ");
+
+            string? bestaetigung = Console.ReadLine();
+
+            if (bestaetigung?.ToLower() == "j")
+            {
+                datenZugriff.TeilnehmerLoeschen(teilnehmerID);
+
+                // Auch die lokale Liste aktualisieren
+                teilnehmerListe.Remove(teilnehmer);
+
+                Console.WriteLine("Teilnehmer wurde erfolgreich gelöscht!");
+            }
+            else
+            {
+                Console.WriteLine("Löschen wurde abgebrochen.");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Drücke eine Taste zum Zurückkehren.");
+            Console.ReadKey();
+        }
+
+
         public void Teilnehmermenue()
         {
             bool menueLaeuft = true;
@@ -220,7 +293,8 @@ namespace SchwimmbadConsole
                 Console.WriteLine();
                 Console.WriteLine("1. Teilnehmer anmelden");
                 Console.WriteLine("2. Alle Teilnehmer anzeigen");
-                Console.WriteLine("0. Zurück zum Hauptmenü");
+                Console.WriteLine("3. Teilnehmer löschen");
+                Console.WriteLine("0. Zurück zum Hauptmenü"); 
                 Console.WriteLine();
                 Console.Write("Bitte wählen Sie eine Option: ");
 
@@ -234,6 +308,10 @@ namespace SchwimmbadConsole
 
                     case "2":
                         AlleTeilnehmerAnzeigen();
+                        break;
+
+                    case "3":
+                        TeilnehmerLoeschen();
                         break;
 
                     case "0":

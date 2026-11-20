@@ -69,5 +69,39 @@ namespace SchwimmbadConsole
                 dateiPfad,
                 zeile + Environment.NewLine);
         }
+
+
+        public void KursLoeschen(int kursID)
+        {
+            List<Kurs> kurse = KurseLaden();
+
+            Kurs? kurs = kurse.FirstOrDefault(k => k.KursID == kursID);
+
+            if (kurs == null)
+            {
+                Console.WriteLine("Der Kurs wurde nicht gefunden!");
+                return;
+            }
+
+            kurse.Remove(kurs);
+
+            List<string> zeilen = new List<string>();
+
+            foreach (Kurs vorhandenerKurs in kurse)
+            {
+                string zeile =
+                    vorhandenerKurs.KursID + ";" +
+                    vorhandenerKurs.Kursname + ";" +
+                    vorhandenerKurs.Wochentag + ";" +
+                    vorhandenerKurs.Beginn + ";" +
+                    vorhandenerKurs.Ende + ";" +
+                    vorhandenerKurs.MaxTeilnehmer;
+
+                zeilen.Add(zeile);
+            }
+
+            File.WriteAllLines(dateiPfad, zeilen);
+        }
+
     }
 }

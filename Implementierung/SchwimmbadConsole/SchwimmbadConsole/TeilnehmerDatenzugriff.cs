@@ -3,6 +3,7 @@ using SchwimmbadConsole.SchwimmbadConsole;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SchwimmbadConsole
 {
@@ -86,6 +87,87 @@ namespace SchwimmbadConsole
 
             Console.WriteLine("Teilnehmer wurde in beiden Dateien gespeichert.");
         }
+
+
+
+        public void KursZuordnungEntfernen(int kursID)
+        {
+            // Alle Teilnehmer laden
+            List<Teilnehmer> teilnehmerListe = TeilnehmerLaden();
+
+            // Teilnehmer durchlaufen
+            foreach (Teilnehmer teilnehmer in teilnehmerListe)
+            {
+                if (teilnehmer.KursID == kursID)
+                {
+                    // Kurszuordnung entfernen
+                    teilnehmer.KursID = 0;
+                }
+            }
+
+            // Teilnehmer wieder als Textzeilen speichern
+            List<string> zeilen = new List<string>();
+
+            foreach (Teilnehmer teilnehmer in teilnehmerListe)
+            {
+                string zeile =
+                    teilnehmer.TeilnehmerID + ";" +
+                    teilnehmer.Vorname + ";" +
+                    teilnehmer.Nachname + ";" +
+                    teilnehmer.Geburtsdatum + ";" +
+                    teilnehmer.Telefon + ";" +
+                    teilnehmer.Email + ";" +
+                    teilnehmer.KursID;
+
+                zeilen.Add(zeile);
+            }
+
+            File.WriteAllLines(dateiPfad, zeilen);
+        }
+
+
+
+        public void TeilnehmerLoeschen(int teilnehmerID)
+        {
+            // Alle Teilnehmer laden
+            List<Teilnehmer> teilnehmerListe = TeilnehmerLaden();
+
+            // Teilnehmer anhand der ID suchen
+            Teilnehmer? teilnehmer = teilnehmerListe.FirstOrDefault(t => t.TeilnehmerID == teilnehmerID);
+
+            // Prüfen, ob Teilnehmer existiert
+            if (teilnehmer == null)
+            {
+                Console.WriteLine("Teilnehmer wurde nicht gefunden!");
+                return;
+            }
+
+            // Teilnehmer aus der Liste entfernen
+            teilnehmerListe.Remove(teilnehmer);
+
+            // Verbleibende Teilnehmer als Textzeilen speichern
+            List<string> zeilen = new List<string>();
+
+            foreach (Teilnehmer vorhandenerTeilnehmer in teilnehmerListe)
+            {
+                string zeile =
+                    vorhandenerTeilnehmer.TeilnehmerID + ";" +
+                    vorhandenerTeilnehmer.Vorname + ";" +
+                    vorhandenerTeilnehmer.Nachname + ";" +
+                    vorhandenerTeilnehmer.Geburtsdatum + ";" +
+                    vorhandenerTeilnehmer.Telefon + ";" +
+                    vorhandenerTeilnehmer.Email + ";" +
+                    vorhandenerTeilnehmer.KursID;
+
+                zeilen.Add(zeile);
+            }
+
+            // Datei aktualisieren
+            File.WriteAllLines(dateiPfad, zeilen);
+        }
+
+
+
 
     }
 }

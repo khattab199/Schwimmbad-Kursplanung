@@ -312,6 +312,83 @@ namespace SchwimmbadConsole
             Console.ReadKey();
         }
 
+
+        public void KursleiterLoeschen()
+        {
+            Console.Clear();
+
+            Console.WriteLine("==================================");
+            Console.WriteLine("        KURSLEITER LÖSCHEN");
+            Console.WriteLine("==================================");
+
+            // Alle Kursleiter neu laden
+            kursleiterListe = datenZugriff.KursleiterLaden();
+
+            // Prüfen, ob Kursleiter vorhanden sind
+            if (kursleiterListe.Count == 0)
+            {
+                Console.WriteLine("Es sind keine Kursleiter vorhanden.");
+                Console.ReadKey();
+                return;
+            }
+
+            // Alle Kursleiter anzeigen
+            AlleKursleiterAnzeigen();
+
+            Console.WriteLine();
+            Console.Write("Bitte geben Sie die Kursleiter-ID ein: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int kursleiterID))
+            {
+                Console.WriteLine("Ungültige Kursleiter-ID!");
+                Console.ReadKey();
+                return;
+            }
+
+            // Kursleiter suchen
+            Kursleiter? kursleiter = kursleiterListe.FirstOrDefault(k => k.KursleiterID == kursleiterID);
+
+            if (kursleiter == null)
+            {
+                Console.WriteLine("Dieser Kursleiter existiert nicht!");
+                Console.ReadKey();
+                return;
+            }
+
+            // Kursleiter anzeigen
+            Console.WriteLine();
+            Console.WriteLine(
+                "Ausgewählter Kursleiter: " +
+                kursleiter.Vorname + " " + kursleiter.Nachname);
+
+            Console.Write("Möchten Sie diesen Kursleiter wirklich löschen? (j/n): ");
+
+            string? bestaetigung = Console.ReadLine();
+
+            if (bestaetigung?.ToLower() == "j")
+            {
+                // Zugehörige Kurszuordnungen entfernen
+                zuordnungsDatenzugriff.KursleiterZuordnungenLoeschen(kursleiterID);
+
+                // Kursleiter löschen
+                datenZugriff.KursleiterLoeschen(kursleiterID);
+
+                // Lokale Liste aktualisieren
+                kursleiterListe.Remove(kursleiter);
+
+                Console.WriteLine("Kursleiter wurde erfolgreich gelöscht!");
+            }
+            else
+            {
+                Console.WriteLine("Löschen wurde abgebrochen.");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Drücke eine Taste zum Zurückkehren.");
+            Console.ReadKey();
+        }
+
+
         public void KursleiterMenue()
         {
             bool menueLaeuft = true;
@@ -328,6 +405,7 @@ namespace SchwimmbadConsole
                 Console.WriteLine("2. Alle Kursleiter anzeigen");
                 Console.WriteLine("3. Kursleiter einem Kurs zuordnen");
                 Console.WriteLine("4. Alle Kursleiter-Zuordnungen anzeigen");
+                Console.WriteLine("5. Kursleiter löschen");
                 Console.WriteLine("0. Zurück zum Hauptmenü");
                 Console.WriteLine();
 
@@ -351,6 +429,10 @@ namespace SchwimmbadConsole
 
                     case "4":
                         AlleZuordnungenAnzeigen();
+                        break;
+
+                    case "5":
+                        KursleiterLoeschen();
                         break;
 
                     case "0":
