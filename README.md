@@ -1,4 +1,4 @@
-# Schwimmbad – Kursplanung
+# Schwimmbad – Kursplanung änderung von kevin
 
 **Projektarbeit für Programmierung und Softwaretechnik**
 
